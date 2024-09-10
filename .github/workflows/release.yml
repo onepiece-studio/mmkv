@@ -1,11 +1,9 @@
 name: release xcframework
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version number (e.g. v1.3.5)'
-        required: true
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   release:
@@ -15,11 +13,14 @@ jobs:
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
+      - name: Get Version
+        run: |
+          echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
       - name: Checkout
         uses: actions/checkout@v4
         with:
           repository: 'Tencent/MMKV'
-          ref: ${{ github.event.inputs.version }}
+          ref: ${{ env.VERSION }}
       - name: Build Binaries
         run: |
           rm -rf archives
@@ -69,22 +70,37 @@ jobs:
           
           zip -r -X "archives/MMKV.xcframework.zip" "archives/MMKV.xcframework"
       - name: Compute Checksum
-        id: checksum
         run: |
-          echo "checksum=$(swift package compute-checksum ./archives/MMKV.xcframework.zip)" >> $GITHUB_OUTPUT
+          echo "CHECKSUM=$(swift package compute-checksum ./archives/MMKV.xcframework.zip)" >> $GITHUB_ENV
       - name: Create Release
         id: create_release
         uses: ncipollo/release-action@v1
         with:
           body: |
             ```swift
-            .binaryTarget(
+            let package = Package(
                 name: "MMKV",
-                url: "https://github.com/devjia/mmkv-spm/releases/download/${{ github.event.inputs.version }}/MMKV.xcframework.zip",
-                checksum: "${{ steps.checksum.outputs.checksum }}"
-            ),
+                platforms: [
+                    .iOS(.v16),
+                    .macOS(.v13),
+                    .tvOS(.v16),
+                    .visionOS(.v1)
+                ],
+                products: [
+                    .library(
+                        name: "MMKV",
+                        targets: ["MMKV"]),
+                ],
+                targets: [
+                    .binaryTarget(
+                        name: "MMKV",
+                        url: "https://github.com/devjia/mmkv-spm/releases/download/${{ env.VERSION }}/MMKV.xcframework.zip",
+                        checksum: "${{ env.CHECKSUM }}"
+                    )
+                ]
+            )
             ```
           allowUpdates: true
           artifacts: "archives/MMKV.xcframework.zip"
           token: ${{ secrets.USER_TOKEN }}
-          tag: ${{ github.event.inputs.version }}
+          tag: ${{ env.VERSION }}
