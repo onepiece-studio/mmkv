@@ -9,7 +9,7 @@ on:
 
 jobs:
   release:
-    runs-on: macos-latest-xlarge
+    runs-on: macos-latest
     steps:
       - name: Select Xcode
         uses: maxim-lobanov/setup-xcode@v1
