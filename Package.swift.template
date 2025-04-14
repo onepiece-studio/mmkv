@@ -18,11 +18,11 @@ let package = Package(
             name: "MMKV",
             targets: ["MMKV"]),
     ],
-    targets: [
+    targets: [  
         .binaryTarget(
             name: "MMKV",
-            url: "",
-            checksum: ""
+            url: "__DOWNLOAD_URL__",
+            checksum: "__CHECKSUM__"
         )
     ]
 )
