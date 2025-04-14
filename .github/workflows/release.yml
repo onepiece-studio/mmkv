@@ -173,8 +173,8 @@ jobs:
           rm -rf Package.swift
           cp -f Package.swift.template Package.swift
 
-          sed -i "s|__DOWNLOAD_URL__|$DOWNLOAD_URL|g" Package.swift
-          sed -i "s|__CHECKSUM__|$CHECKSUM|g" Package.swift
+          sed -i "" "s|__DOWNLOAD_URL__|$DOWNLOAD_URL|g" Package.swift
+          sed -i "" "s|__CHECKSUM__|$CHECKSUM|g" Package.swift
 
           echo "Generate Package.swift:"
           cat Package.swift
