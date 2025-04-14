@@ -200,6 +200,3 @@ jobs:
           artifacts: "MMKV/archives/MMKV.xcframework.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ env.RELEASE_TAG }}
-
-      - name: Keepalive Workflow
-        uses: gautamkrishnar/keepalive-workflow@v2
