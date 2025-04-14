@@ -112,29 +112,10 @@ jobs:
           -workspace MMKV.xcworkspace \
           -scheme MMKV \
           -configuration Release \
-          -destination "generic/platform=watchOS" \
-          -archivePath "archives/MMKV-watchOS" \
-          SKIP_INSTALL=NO \
-          BUILD_LIBRARY_FOR_DISTRIBUTION=YES
-          
-          xcodebuild archive \
-          -workspace MMKV.xcworkspace \
-          -scheme MMKV \
-          -configuration Release \
-          -destination "generic/platform=watchOS Simulator" \
-          -archivePath "archives/MMKV-watchOS-Simulator" \
-          SKIP_INSTALL=NO \
-          BUILD_LIBRARY_FOR_DISTRIBUTION=YES
-          
-          xcodebuild archive \
-          -workspace MMKV.xcworkspace \
-          -scheme MMKV \
-          -configuration Release \
           -destination "generic/platform=macOS" \
           -archivePath "archives/MMKV-macOS" \
           SKIP_INSTALL=NO \
           BUILD_LIBRARY_FOR_DISTRIBUTION=YES
-          
           
           xcodebuild archive \
           -workspace MMKV.xcworkspace \
@@ -170,8 +151,6 @@ jobs:
           -archive archives/MMKV-iOS-Simulator.xcarchive -framework MMKV.framework \
           -archive archives/MMKV-tvOS.xcarchive -framework MMKV.framework \
           -archive archives/MMKV-tvOS-Simulator.xcarchive -framework MMKV.framework \
-          -archive archives/MMKV-watchOS.xcarchive -framework MMKV.framework \
-          -archive archives/MMKV-watchOS-Simulator.xcarchive -framework MMKV.framework \
           -archive archives/MMKV-macOS.xcarchive -framework MMKV.framework \
           -archive archives/MMKV-macOS-Catalyst.xcarchive -framework MMKV.framework \
           -archive archives/MMKV-visionOS.xcarchive -framework MMKV.framework \
