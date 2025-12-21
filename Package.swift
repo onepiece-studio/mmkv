@@ -20,8 +20,8 @@ let package = Package(
     targets: [  
         .binaryTarget(
             name: "MMKV",
-            url: "https://github.com/onepiece-studio/mmkv/releases/download/2.2.4/MMKV.xcframework.zip",
-            checksum: "2b9a62d45c39a223e0a5beb7371e49acb5e51dfb83e5e5813dd7893905457a3e"
+            url: "https://github.com/onepiece-studio/mmkv/releases/download/2.3.0/MMKV.xcframework.zip",
+            checksum: "e21fb2c7e11c9073b79aa1672ab97f04d74a8f1386116929acd00c0735b0eec3"
         )
     ]
 )
